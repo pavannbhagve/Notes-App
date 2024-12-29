@@ -1,11 +1,58 @@
-const arr = [1,2,3,4];
+const  notesContainer = document.querySelector(".notes-container");
+const but = document.querySelector(".btn");
+let notes = document.querySelectorAll(".input-box");
 
-console.log(arr);
 
-const arr1 = [5,6,7,8];
 
-console.log(arr1);
 
-const arr3 = [...arr,...arr1]
 
-console.log(arr3);
+
+
+function updateStorage() {
+
+    localStorage.setItem("notes", notesContainer.innerHTML);
+    
+};
+
+
+but.addEventListener("click", ()=> {
+ let inputBox = document.createElement("p");
+    let img = document.createElement("img");
+    inputBox.className = "input-box";
+    inputBox.setAttribute("contenteditable", "true");
+    img.src = "notes-app-img/images/delete.png";
+    notesContainer.appendChild(inputBox).appendChild(img);
+
+})
+
+notesContainer.addEventListener("click", (e) => {
+
+    if (e.target.tagName ===  "IMG") {
+
+        e.target.parentElement.remove();
+        updateStorage();
+        
+    } else if(e.tagName.tagName ==="P"){
+
+        notes.document.querySelectorAll(".input-box");
+        notes.forEach(nt => {
+            nt.onkeyup = function(){
+                updateStorage();
+            }
+        })
+
+
+        
+    }
+
+
+})
+
+document.addEventListener("keydown",event => {
+    if (event.key === "Enter") {
+        document.execCommand("insertLineBreak");
+        event.preventDefault();
+
+    }
+});
+
